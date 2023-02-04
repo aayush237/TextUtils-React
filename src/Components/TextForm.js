@@ -2,19 +2,26 @@ import React,{useState} from "react";
 
 export default function TextForm(props) {
   const handleUpClick = () => {
-    console.log("You clicked the button " + text);
+    // console.log("You clicked the button: " + text);
     let UCText =  text.toUpperCase();
     setText(UCText);
   }
 
+  const handleLoClick = () => {
+    // console.log("You clicked the button: " + text);
+    let UCText =  text.toLowerCase();
+    setText(UCText);
+  }
+
   const handleOnChange = (event) => {
-    console.log("On change");
+    // console.log("On change");
     setText(event.target.value);
   }
 
 
-    const [text, setText] = useState("Enter text here");
+    const [text, setText] = useState("");
   return (
+    <>
     <div>
         <h1>{props.heading}</h1>
         <div className="mb-3">
@@ -24,7 +31,16 @@ export default function TextForm(props) {
             rows="8"
           ></textarea>
         </div>
-        <button className="btn btn-primary" onClick={handleUpClick}>Convert to upper case</button>
+        <button className="btn btn-primary mx-2" onClick={handleUpClick}>Convert to upper case</button>
+        <button className="btn btn-primary" onClick={handleLoClick}>Convert to lower case</button>
     </div>
+    <div className="container my-3">
+        <h2>Your text summary:</h2>
+        <p>Your text has {text.split(" ").length} words and {text.length} characters.</p>
+        <p>It is a {0.008 * text.split(" ").length} minutes long read.</p>
+        <h2>Preview</h2>
+        <p>{text}</p>
+    </div>
+    </>
   );
 }
