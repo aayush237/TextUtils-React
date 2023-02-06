@@ -7,24 +7,27 @@ export default function TextForm(props) {
     // console.log("You clicked the button: " + text);
     let UCText =  text.toUpperCase();
     setText(UCText);
+    props.showAlert("You've converted into upper case", "success");
   }
-
+  
   const handleLoClick = () => {
     // console.log("You clicked the button: " + text);
     let UCText =  text.toLowerCase();
     setText(UCText);
+    props.showAlert("You've converted into lower case", "success");
   }
-
+  
   const handleOnChange = (event) => {
     // console.log("On change");
     setText(event.target.value);
   }
-
+  
   const handleSen = () => {
     for(count=0; count<text.length; count++){
       if(text.charAt(count).match(/[.?!]/)){
         sentenceCount++; 
         setCount(sentenceCount);
+        props.showAlert("Counted the sentences", "success");
       }
     }
   }
@@ -43,9 +46,9 @@ export default function TextForm(props) {
             rows="8"
           ></textarea>
         </div>
-        <button className="btn btn-primary mx-2" onClick={handleUpClick}>Convert to upper case</button>
-        <button className="btn btn-primary mx-2" onClick={handleLoClick}>Convert to lower case</button>
-        <button className="btn btn-primary" onClick={handleSen}>Count sentences</button>
+        <button className={`btn btn-${() => {props.toggleMode()}} mx-2`} onClick={handleUpClick}>Convert to upper case</button>
+        <button className={`btn btn-${() => {props.toggleMode()}} mx-2`} onClick={handleLoClick}>Convert to lower case</button>
+        <button className={`btn btn-${() => {props.toggleMode()}} mx-2`} onClick={handleSen}>Count sentences</button>
     </div>
     <div className="container my-3" style={{color: props.mode==="dark"?"white":"black"}}>
         <h2>Your text summary:</h2>
